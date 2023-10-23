@@ -28,105 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNewCatergory = new System.Windows.Forms.ToolStripButton();
-            this.btnEditCategory = new System.Windows.Forms.ToolStripButton();
-            this.btnRefreshCategory = new System.Windows.Forms.ToolStripButton();
-            this.dgCategory = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCategory)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtNewCategory = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // toolStrip1
+            // label1
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNewCatergory,
-            this.btnEditCategory,
-            this.btnRefreshCategory});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(284, 62);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(180, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "عنوان دسته‌بندی :";
             // 
-            // btnNewCatergory
+            // txtNewCategory
             // 
-            this.btnNewCatergory.Image = global::Library.App.Properties.Resources.list2;
-            this.btnNewCatergory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNewCatergory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNewCatergory.Name = "btnNewCatergory";
-            this.btnNewCatergory.Size = new System.Drawing.Size(68, 59);
-            this.btnNewCatergory.Text = "اضافه کردن";
-            this.btnNewCatergory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.txtNewCategory.Location = new System.Drawing.Point(12, 37);
+            this.txtNewCategory.Name = "txtNewCategory";
+            this.txtNewCategory.Size = new System.Drawing.Size(268, 21);
+            this.txtNewCategory.TabIndex = 1;
             // 
-            // btnEditCategory
+            // btnSave
             // 
-            this.btnEditCategory.Image = global::Library.App.Properties.Resources._1371475973_document_edit;
-            this.btnEditCategory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEditCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditCategory.Name = "btnEditCategory";
-            this.btnEditCategory.Size = new System.Drawing.Size(74, 59);
-            this.btnEditCategory.Text = "ویرایش کردن";
-            this.btnEditCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnRefreshCategory
-            // 
-            this.btnRefreshCategory.Image = global::Library.App.Properties.Resources._1371476368_Synchronize;
-            this.btnRefreshCategory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnRefreshCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRefreshCategory.Name = "btnRefreshCategory";
-            this.btnRefreshCategory.Size = new System.Drawing.Size(60, 59);
-            this.btnRefreshCategory.Text = "بروزرسانی";
-            this.btnRefreshCategory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // dgCategory
-            // 
-            this.dgCategory.AllowUserToAddRows = false;
-            this.dgCategory.AllowUserToDeleteRows = false;
-            this.dgCategory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCategory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2});
-            this.dgCategory.Location = new System.Drawing.Point(12, 65);
-            this.dgCategory.Name = "dgCategory";
-            this.dgCategory.ReadOnly = true;
-            this.dgCategory.Size = new System.Drawing.Size(260, 284);
-            this.dgCategory.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "CategoryId";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "CategoryTitle";
-            this.Column2.HeaderText = "عنوان دسته‌بندی";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.btnSave.Location = new System.Drawing.Point(106, 82);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "ثبت";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // frmNewBookCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 361);
-            this.Controls.Add(this.dgCategory);
-            this.Controls.Add(this.toolStrip1);
+            this.ClientSize = new System.Drawing.Size(284, 161);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.txtNewCategory);
+            this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmNewBookCategory";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "دسته‌بندی";
+            this.Text = "اضافه کردن دسته‌بندی";
             this.Load += new System.EventHandler(this.frmNewBookCategory_Load);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCategory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,12 +81,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnNewCatergory;
-        private System.Windows.Forms.ToolStripButton btnEditCategory;
-        private System.Windows.Forms.ToolStripButton btnRefreshCategory;
-        private System.Windows.Forms.DataGridView dgCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNewCategory;
+        private System.Windows.Forms.Button btnSave;
     }
 }
