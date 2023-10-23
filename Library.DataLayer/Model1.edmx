@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Library_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Library_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="LibraryBook">
           <Key>
             <PropertyRef Name="BookId" />
@@ -12,6 +12,7 @@
           <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookCategoryId" Type="int" Nullable="false" />
           <Property Name="BookTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="BookAuthor" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="BookPublishYear" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="BookImage" Type="varchar" MaxLength="50" Nullable="false" />
@@ -43,8 +44,7 @@
             <End Role="LibraryBook" EntitySet="LibraryBook" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Library_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -59,6 +59,7 @@
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="BookImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LibraryBookCategory" Relationship="Self.FK_LibraryBook_LibraryBookCategory" FromRole="LibraryBook" ToRole="LibraryBookCategory" />
+          <Property Name="BookAuthor" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LibraryBookCategory">
           <Key>
@@ -97,6 +98,7 @@
           <EntitySetMapping Name="LibraryBooks">
             <EntityTypeMapping TypeName="Library_DBModel.LibraryBook">
               <MappingFragment StoreEntitySet="LibraryBook">
+                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="BookCategoryId" ColumnName="BookCategoryId" />
                 <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
