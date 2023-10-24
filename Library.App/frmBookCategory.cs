@@ -33,10 +33,17 @@ namespace Library.App
             }
         }
 
+        //This method is for refreshing grid
         public void BindGrid()
         {
             dgCategory.AutoGenerateColumns = false;
+            dgCategory.DataSource = null;
+            var categories = db.BookCategoryRepository.Get();
             dgCategory.DataSource = db.BookCategoryRepository.Get();
+            dgCategory.Refresh();
+
+
+
         }
 
         private void btnRefreshCategory_Click(object sender, EventArgs e)
