@@ -26,9 +26,15 @@ namespace Library.App
 
         private void btnBookCategory_Click(object sender, EventArgs e)
         {
-            
+
             frmBookCategory frm = new frmBookCategory();
             frm.ShowDialog();
+        }
+
+        private void btnBook_Click(object sender, EventArgs e)
+        {
+            frmBook frmBook = new frmBook();
+            frmBook.ShowDialog();
         }
     }
 }

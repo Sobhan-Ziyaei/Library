@@ -99,5 +99,7 @@ namespace Library.App
         {
             dgCategory.DataSource = db.BookCategoryRepository.Get(x => x.CategoryTitle.Contains(txtCategoryFilter.Text));
         }
+
+
     }
 }

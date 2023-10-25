@@ -17,10 +17,11 @@ namespace Library.DataLayer
         public int BookId { get; set; }
         public int BookCategoryId { get; set; }
         public string BookTitle { get; set; }
-        public string BookPublishYear { get; set; }
-        public System.DateTime DateTime { get; set; }
-        public string BookImage { get; set; }
         public string BookAuthor { get; set; }
+        public string BookPublishYear { get; set; }
+        public Nullable<System.DateTime> DateTime { get; set; }
+        public string BookImage { get; set; }
+        public string BookCategory { get; set; }
     
         public virtual LibraryBookCategory LibraryBookCategory { get; set; }
     }

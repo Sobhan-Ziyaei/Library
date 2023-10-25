@@ -11,10 +11,11 @@
           </Key>
           <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookCategoryId" Type="int" Nullable="false" />
+          <Property Name="BookCategory" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="BookTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="BookAuthor" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="BookPublishYear" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" />
           <Property Name="BookImage" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="LibraryBookCategory">
@@ -55,11 +56,12 @@
           <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BookCategoryId" Type="Int32" Nullable="false" />
           <Property Name="BookTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BookAuthor" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="BookPublishYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
           <Property Name="BookImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="LibraryBookCategory" Relationship="Self.FK_LibraryBook_LibraryBookCategory" FromRole="LibraryBook" ToRole="LibraryBookCategory" />
-          <Property Name="BookAuthor" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="BookCategory" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LibraryBookCategory">
           <Key>
@@ -98,10 +100,11 @@
           <EntitySetMapping Name="LibraryBooks">
             <EntityTypeMapping TypeName="Library_DBModel.LibraryBook">
               <MappingFragment StoreEntitySet="LibraryBook">
-                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
+                <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
                 <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="BookCategoryId" ColumnName="BookCategoryId" />
                 <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
                 <ScalarProperty Name="BookPublishYear" ColumnName="BookPublishYear" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="BookImage" ColumnName="BookImage" />
