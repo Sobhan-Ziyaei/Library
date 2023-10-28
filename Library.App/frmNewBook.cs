@@ -48,25 +48,22 @@ namespace Library.App
                     }
 
                     // Create a new LibraryBook instance and set its properties
-                    var newBook = new DataLayer.LibraryBook
+                    var newBook = new DataLayer.tblBook
                     {
-                        BookTitle = txtBookTitle.Text,
-                        BookAuthor = txtBookAuthor.Text,
-                        BookCategoryId = selectedCategoryId,
-                        BookImage = bookImage.ImageLocation,
-                        BookPublishYear = numPublishYear.Value.ToString(),
-                        BookCategory = cbBookCategory.Text,
+                        Title = txtBookTitle.Text,
+                        Author = txtBookAuthor.Text,
+                        Image = bookImage.ImageLocation,
+                        PublishYear = numPublishYear.Value.ToString(),
                     };
                     db.BookRepository.Insert(newBook);
                 }
                 else
                 {
                     var book = db.BookRepository.GetById(bookId);
-                    book.BookTitle = txtBookTitle.Text;
-                    book.BookAuthor = txtBookAuthor.Text;
-                    book.BookPublishYear = numPublishYear.Value.ToString();
-                    book.BookImage = bookImage.ImageLocation;
-                    book.BookCategory = cbBookCategory.Text;
+                    book.Title = txtBookTitle.Text;
+                    book.Author = txtBookAuthor.Text;
+                    book.PublishYear = numPublishYear.Value.ToString();
+                    book.Image = bookImage.ImageLocation;
                     db.BookRepository.Update(book);
 
                 }
@@ -94,10 +91,10 @@ namespace Library.App
                 this.Text = "ویرایش کتاب";
                 btnSave.Text = "ویرایش";
                 var book = db.BookRepository.GetById(bookId);
-                txtBookTitle.Text = book.BookTitle;
-                txtBookAuthor.Text = book.BookAuthor;
-                numPublishYear.Value = int.Parse(book.BookPublishYear);
-                bookImage.ImageLocation = book.BookImage;
+                txtBookTitle.Text = book.Title;
+                txtBookAuthor.Text = book.Author;
+                numPublishYear.Value = int.Parse(book.PublishYear);
+                bookImage.ImageLocation = book.Image;
             }
 
             cbBookCategory.DataSource = db.BookCategoryRepository.Get();

@@ -31,6 +31,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnBookCategory = new System.Windows.Forms.ToolStripButton();
             this.btnBook = new System.Windows.Forms.ToolStripButton();
+            this.btnEditUser = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,7 +39,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnBookCategory,
-            this.btnBook});
+            this.btnBook,
+            this.btnEditUser});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(784, 62);
@@ -67,6 +69,17 @@
             this.btnBook.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnBook.Click += new System.EventHandler(this.btnBook_Click);
             // 
+            // btnEditUser
+            // 
+            this.btnEditUser.Image = global::Library.App.Properties.Resources._1371476468_preferences_contact_list;
+            this.btnEditUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEditUser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditUser.Name = "btnEditUser";
+            this.btnEditUser.Size = new System.Drawing.Size(86, 59);
+            this.btnEditUser.Text = "تغییر کلمه عبور";
+            this.btnEditUser.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,6 +105,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnBookCategory;
         private System.Windows.Forms.ToolStripButton btnBook;
+        private System.Windows.Forms.ToolStripButton btnEditUser;
     }
 }
 

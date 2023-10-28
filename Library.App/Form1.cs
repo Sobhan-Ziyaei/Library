@@ -21,7 +21,16 @@ namespace Library.App
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frmRegisterOrLogin frmRegisterOrLogin = new frmRegisterOrLogin();
+            if (frmRegisterOrLogin.ShowDialog() == DialogResult.OK)
+            {
+                this.Show();
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
 
         private void btnBookCategory_Click(object sender, EventArgs e)
@@ -35,6 +44,13 @@ namespace Library.App
         {
             frmBook frmBook = new frmBook();
             frmBook.ShowDialog();
+        }
+
+        private void btnEditUser_Click(object sender, EventArgs e)
+        {
+            frmRegisterOrLogin frmRegisterOrLogin = new frmRegisterOrLogin();
+            frmRegisterOrLogin.isLogin = true;
+            frmRegisterOrLogin.ShowDialog();
         }
     }
 }

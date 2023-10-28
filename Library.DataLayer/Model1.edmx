@@ -4,91 +4,244 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Library_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="LibraryBook">
+      <Schema Namespace="Library_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblBook">
           <Key>
-            <PropertyRef Name="BookId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BookCategoryId" Type="int" Nullable="false" />
-          <Property Name="BookCategory" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="BookTitle" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="BookAuthor" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="BookPublishYear" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" />
-          <Property Name="BookImage" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="PublishYear" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="LibraryBookCategory">
+        <EntityType Name="tblBookCategories">
           <Key>
-            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CategoryTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_LibraryBook_LibraryBookCategory">
-          <End Role="LibraryBookCategory" Type="Self.LibraryBookCategory" Multiplicity="1" />
-          <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="*" />
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblBookCategories_tblBook">
+          <End Role="tblBook" Type="Self.tblBook" Multiplicity="1" />
+          <End Role="tblBookCategories" Type="Self.tblBookCategories" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LibraryBookCategory">
-              <PropertyRef Name="CategoryId" />
+            <Principal Role="tblBook">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="LibraryBook">
-              <PropertyRef Name="BookCategoryId" />
+            <Dependent Role="tblBookCategories">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBookCategories_tblCategory">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+          <End Role="tblBookCategories" Type="Self.tblBookCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblBookCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComment_tblBook">
+          <End Role="tblBook" Type="Self.tblBook" Multiplicity="1" />
+          <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBook">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblComment">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComment_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblComment">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Library_DBModelStoreContainer">
-          <EntitySet Name="LibraryBook" EntityType="Self.LibraryBook" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LibraryBookCategory" EntityType="Self.LibraryBookCategory" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_LibraryBook_LibraryBookCategory" Association="Self.FK_LibraryBook_LibraryBookCategory">
-            <End Role="LibraryBookCategory" EntitySet="LibraryBookCategory" />
-            <End Role="LibraryBook" EntitySet="LibraryBook" />
+          <EntitySet Name="tblBook" EntityType="Self.tblBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBookCategories" EntityType="Self.tblBookCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblComment" EntityType="Self.tblComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBookCategories_tblBook" Association="Self.FK_tblBookCategories_tblBook">
+            <End Role="tblBook" EntitySet="tblBook" />
+            <End Role="tblBookCategories" EntitySet="tblBookCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBookCategories_tblCategory" Association="Self.FK_tblBookCategories_tblCategory">
+            <End Role="tblCategory" EntitySet="tblCategory" />
+            <End Role="tblBookCategories" EntitySet="tblBookCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComment_tblBook" Association="Self.FK_tblComment_tblBook">
+            <End Role="tblBook" EntitySet="tblBook" />
+            <End Role="tblComment" EntitySet="tblComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComment_tblUser" Association="Self.FK_tblComment_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblComment" EntitySet="tblComment" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Library_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="LibraryBook">
+        <EntityType Name="tblBook">
           <Key>
-            <PropertyRef Name="BookId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BookCategoryId" Type="Int32" Nullable="false" />
-          <Property Name="BookTitle" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BookAuthor" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BookPublishYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateTime" Type="DateTime" Precision="3" />
-          <Property Name="BookImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="LibraryBookCategory" Relationship="Self.FK_LibraryBook_LibraryBookCategory" FromRole="LibraryBook" ToRole="LibraryBookCategory" />
-          <Property Name="BookCategory" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PublishYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblBookCategories" Relationship="Self.FK_tblBookCategories_tblBook" FromRole="tblBook" ToRole="tblBookCategories" />
+          <NavigationProperty Name="tblComments" Relationship="Self.FK_tblComment_tblBook" FromRole="tblBook" ToRole="tblComment" />
         </EntityType>
-        <EntityType Name="LibraryBookCategory">
+        <EntityType Name="tblBookCategory">
           <Key>
-            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="LibraryBooks" Relationship="Self.FK_LibraryBook_LibraryBookCategory" FromRole="LibraryBookCategory" ToRole="LibraryBook" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblBook" Relationship="Self.FK_tblBookCategories_tblBook" FromRole="tblBookCategories" ToRole="tblBook" />
+          <NavigationProperty Name="tblCategory" Relationship="Self.FK_tblBookCategories_tblCategory" FromRole="tblBookCategories" ToRole="tblCategory" />
         </EntityType>
-        <Association Name="FK_LibraryBook_LibraryBookCategory">
-          <End Role="LibraryBookCategory" Type="Self.LibraryBookCategory" Multiplicity="1" />
-          <End Role="LibraryBook" Type="Self.LibraryBook" Multiplicity="*" />
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblBookCategories" Relationship="Self.FK_tblBookCategories_tblCategory" FromRole="tblCategory" ToRole="tblBookCategories" />
+        </EntityType>
+        <EntityType Name="tblComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblBook" Relationship="Self.FK_tblComment_tblBook" FromRole="tblComment" ToRole="tblBook" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblComment_tblUser" FromRole="tblComment" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblComments" Relationship="Self.FK_tblComment_tblUser" FromRole="tblUser" ToRole="tblComment" />
+        </EntityType>
+        <Association Name="FK_tblBookCategories_tblBook">
+          <End Role="tblBook" Type="Self.tblBook" Multiplicity="1" />
+          <End Role="tblBookCategories" Type="Self.tblBookCategory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LibraryBookCategory">
-              <PropertyRef Name="CategoryId" />
+            <Principal Role="tblBook">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="LibraryBook">
-              <PropertyRef Name="BookCategoryId" />
+            <Dependent Role="tblBookCategories">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComment_tblBook">
+          <End Role="tblBook" Type="Self.tblBook" Multiplicity="1" />
+          <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBook">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblComment">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblBookCategories_tblCategory">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="1" />
+          <End Role="tblBookCategories" Type="Self.tblBookCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblBookCategories">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblComment_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblComment" Type="Self.tblComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblComment">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Library_DB" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="LibraryBooks" EntityType="Self.LibraryBook" />
-          <EntitySet Name="LibraryBookCategories" EntityType="Self.LibraryBookCategory" />
-          <AssociationSet Name="FK_LibraryBook_LibraryBookCategory" Association="Self.FK_LibraryBook_LibraryBookCategory">
-            <End Role="LibraryBookCategory" EntitySet="LibraryBookCategories" />
-            <End Role="LibraryBook" EntitySet="LibraryBooks" />
+          <EntitySet Name="tblBooks" EntityType="Self.tblBook" />
+          <EntitySet Name="tblBookCategories" EntityType="Self.tblBookCategory" />
+          <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+          <EntitySet Name="tblComments" EntityType="Self.tblComment" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK_tblBookCategories_tblBook" Association="Self.FK_tblBookCategories_tblBook">
+            <End Role="tblBook" EntitySet="tblBooks" />
+            <End Role="tblBookCategories" EntitySet="tblBookCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComment_tblBook" Association="Self.FK_tblComment_tblBook">
+            <End Role="tblBook" EntitySet="tblBooks" />
+            <End Role="tblComment" EntitySet="tblComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblBookCategories_tblCategory" Association="Self.FK_tblBookCategories_tblCategory">
+            <End Role="tblCategory" EntitySet="tblCategories" />
+            <End Role="tblBookCategories" EntitySet="tblBookCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblComment_tblUser" Association="Self.FK_tblComment_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblComment" EntitySet="tblComments" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -97,25 +250,50 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Library_DBModelStoreContainer" CdmEntityContainer="Library_DB">
-          <EntitySetMapping Name="LibraryBooks">
-            <EntityTypeMapping TypeName="Library_DBModel.LibraryBook">
-              <MappingFragment StoreEntitySet="LibraryBook">
-                <ScalarProperty Name="BookCategory" ColumnName="BookCategory" />
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
-                <ScalarProperty Name="BookCategoryId" ColumnName="BookCategoryId" />
-                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
-                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
-                <ScalarProperty Name="BookPublishYear" ColumnName="BookPublishYear" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="BookImage" ColumnName="BookImage" />
+          <EntitySetMapping Name="tblBooks">
+            <EntityTypeMapping TypeName="Library_DBModel.tblBook">
+              <MappingFragment StoreEntitySet="tblBook">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="PublishYear" ColumnName="PublishYear" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LibraryBookCategories">
-            <EntityTypeMapping TypeName="Library_DBModel.LibraryBookCategory">
-              <MappingFragment StoreEntitySet="LibraryBookCategory">
+          <EntitySetMapping Name="tblBookCategories">
+            <EntityTypeMapping TypeName="Library_DBModel.tblBookCategory">
+              <MappingFragment StoreEntitySet="tblBookCategories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="CategoryTitle" ColumnName="CategoryTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCategories">
+            <EntityTypeMapping TypeName="Library_DBModel.tblCategory">
+              <MappingFragment StoreEntitySet="tblCategory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblComments">
+            <EntityTypeMapping TypeName="Library_DBModel.tblComment">
+              <MappingFragment StoreEntitySet="tblComment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="Library_DBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

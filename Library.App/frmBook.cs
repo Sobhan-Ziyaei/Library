@@ -35,7 +35,7 @@ namespace Library.App
 
         private void txtBookFilterSearch_TextChanged(object sender, EventArgs e)
         {
-            dgBook.DataSource = db.BookRepository.Get(x => x.BookTitle.Contains(txtBookFilterSearch.Text) || x.BookAuthor.Contains(txtBookFilterSearch.Text) || x.BookPublishYear.Contains(txtBookFilterSearch.Text) || x.BookCategory.Contains(txtBookFilterSearch.Text));
+            dgBook.DataSource = db.BookRepository.Get(x => x.Title.Contains(txtBookFilterSearch.Text) || x.Author.Contains(txtBookFilterSearch.Text) || x.PublishYear.Contains(txtBookFilterSearch.Text));
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace Library.App
 
                 if (book != null)
                 {
-                    if (MessageBox.Show($"آیا از حذف کتاب {book.BookTitle} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    if (MessageBox.Show($"آیا از حذف کتاب {book.Title} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         db.BookRepository.Delete(book);
                         db.BookRepository.Save();
@@ -84,6 +84,12 @@ namespace Library.App
             {
                 BindGrid();
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            frmComment frmComment = new frmComment();
+            frmComment.ShowDialog();
         }
     }
 }

@@ -25,7 +25,10 @@ namespace Library.DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<LibraryBook> LibraryBooks { get; set; }
-        public virtual DbSet<LibraryBookCategory> LibraryBookCategories { get; set; }
+        public virtual DbSet<tblBook> tblBooks { get; set; }
+        public virtual DbSet<tblBookCategory> tblBookCategories { get; set; }
+        public virtual DbSet<tblCategory> tblCategories { get; set; }
+        public virtual DbSet<tblComment> tblComments { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
     }
 }

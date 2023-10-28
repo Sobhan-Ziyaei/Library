@@ -4,10 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="223e110f436a492690c64590e9ce65fa" Name="Diagram1">
-        <EntityTypeShape EntityType="Library_DBModel.LibraryBook" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Library_DBModel.LibraryBookCategory" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="Library_DBModel.FK_LibraryBook_LibraryBookCategory" ManuallyRouted="false" />
+      <Diagram DiagramId="2250a971ef8142d0b8cd510c0b3f749e" Name="Diagram1">
+        <EntityTypeShape EntityType="Library_DBModel.tblBook" Width="1.5" PointX="1.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_DBModel.tblBookCategory" Width="1.5" PointX="4.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_DBModel.tblCategory" Width="1.5" PointX="6.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_DBModel.tblComment" Width="1.5" PointX="2.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Library_DBModel.tblUser" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="Library_DBModel.FK_tblBookCategories_tblBook" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_DBModel.FK_tblComment_tblBook" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_DBModel.FK_tblBookCategories_tblCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Library_DBModel.FK_tblComment_tblUser" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -56,26 +56,26 @@ namespace Library.App
             if (dgCategory.CurrentRow != null)
             {
                 int categoryId = int.Parse(dgCategory.CurrentRow.Cells[0].Value.ToString());
-                var category = db.BookCategoryRepository.GetById(categoryId);
+                var category = db.CategoryRepository.GetById(categoryId);
 
                 if (category != null)
                 {
                     // Check if there are related books
-                    bool hasRelatedBooks = category.LibraryBooks.Any();
+                    //bool hasRelatedBooks = category.LibraryBooks.Any();
 
-                    if (hasRelatedBooks)
-                    {
-                        MessageBox.Show("این دسته‌بندی دارای کتاب‌های مرتبط است. نمی‌توانید آن را حذف کنید.");
-                    }
-                    else
-                    {
-                        if (MessageBox.Show($"آیا از حذف دسته بندی {category.CategoryTitle} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        {
-                            db.BookCategoryRepository.Delete(category);
-                            db.BookCategoryRepository.Save();
-                            BindGrid();
-                        }
-                    }
+                    //if (hasRelatedBooks)
+                    //{
+                    //    MessageBox.Show("این دسته‌بندی دارای کتاب‌های مرتبط است. نمی‌توانید آن را حذف کنید.");
+                    //}
+                    //else
+                    //{
+                    //    if (MessageBox.Show($"آیا از حذف دسته بندی {category.Title} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    //    {
+                    //        db.BookCategoryRepository.Delete(category);
+                    //        db.BookCategoryRepository.Save();
+                    //        BindGrid();
+                    //    }
+                    //}
                 }
             }
             else
@@ -97,7 +97,7 @@ namespace Library.App
 
         private void txtCategoryFilter_TextChanged(object sender, EventArgs e)
         {
-            dgCategory.DataSource = db.BookCategoryRepository.Get(x => x.CategoryTitle.Contains(txtCategoryFilter.Text));
+            dgCategory.DataSource = db.CategoryRepository.Get(x => x.Title.Contains(txtCategoryFilter.Text));
         }
 
 

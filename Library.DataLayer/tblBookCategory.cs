@@ -12,17 +12,13 @@ namespace Library.DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class LibraryBook
+    public partial class tblBookCategory
     {
+        public int ID { get; set; }
         public int BookId { get; set; }
-        public int BookCategoryId { get; set; }
-        public string BookTitle { get; set; }
-        public string BookAuthor { get; set; }
-        public string BookPublishYear { get; set; }
-        public Nullable<System.DateTime> DateTime { get; set; }
-        public string BookImage { get; set; }
-        public string BookCategory { get; set; }
+        public int CategoryId { get; set; }
     
-        public virtual LibraryBookCategory LibraryBookCategory { get; set; }
+        public virtual tblBook tblBook { get; set; }
+        public virtual tblCategory tblCategory { get; set; }
     }
 }

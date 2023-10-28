@@ -30,18 +30,19 @@ namespace Library.App
             {
                 if (categoryId == 0)
                 {
-                    db.BookCategoryRepository.Insert(new DataLayer.LibraryBookCategory
+                    db.CategoryRepository.Insert(new DataLayer.tblCategory
                     {
-                        CategoryTitle = txtNewCategory.Text,
+                        
+                        Title = txtNewCategory.Text,
                     });
                     MessageBox.Show($"آیا از اضافه کردن {txtNewCategory.Text} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo);
 
                 }
                 else
                 {
-                    var category = db.BookCategoryRepository.GetById(categoryId);
-                    category.CategoryTitle = txtNewCategory.Text;
-                    db.BookCategoryRepository.Update(category);
+                    var category = db.CategoryRepository.GetById(categoryId);
+                    category.Title = txtNewCategory.Text;
+                    db.CategoryRepository.Update(category);
                     MessageBox.Show($"آیا از ویرایش کردن {txtNewCategory.Text} مطمئن هستید؟", "توجه", MessageBoxButtons.YesNo);
 
                 }
@@ -63,8 +64,8 @@ namespace Library.App
             {
                 this.Text = "ویرایش دسته‌بندی";
                 btnSave.Text = "ویرایش";
-                var category = db.BookCategoryRepository.GetById(categoryId);
-                txtNewCategory.Text = category.CategoryTitle;
+                var category = db.CategoryRepository.GetById(categoryId);
+                txtNewCategory.Text = category.Title;
 
             }
         }

@@ -12,18 +12,19 @@ namespace Library.DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class LibraryBookCategory
+    public partial class tblUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LibraryBookCategory()
+        public tblUser()
         {
-            this.LibraryBooks = new HashSet<LibraryBook>();
+            this.tblComments = new HashSet<tblComment>();
         }
     
-        public int CategoryId { get; set; }
-        public string CategoryTitle { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LibraryBook> LibraryBooks { get; set; }
+        public virtual ICollection<tblComment> tblComments { get; set; }
     }
 }
