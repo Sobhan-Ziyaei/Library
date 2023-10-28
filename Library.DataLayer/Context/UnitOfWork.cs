@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Library.DataLayer.Repositories;
+using Library.DataLayer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,19 @@ namespace Library.DataLayer.Context
         private LibraryGenericRepository<tblUser> userRepository;
         private LibraryGenericRepository<tblComment> commentRepository;
         private LibraryGenericRepository<tblBookCategory> bookCategoryRepository;
+        private IUserRepository userUniqueMethodsRepository;
+
+        public IUserRepository UserUniqueMethodsRepository
+        {
+            get
+            {
+                if (userUniqueMethodsRepository == null)
+                {
+                    userUniqueMethodsRepository = new UserCustomUniqueMethodsRepository(db);
+                }
+                return userUniqueMethodsRepository;
+            }
+        }
 
         public LibraryGenericRepository<tblCategory> CategoryRepository
         {

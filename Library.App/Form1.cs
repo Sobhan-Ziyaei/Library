@@ -14,6 +14,7 @@ namespace Library.App
 {
     public partial class Form1 : Form
     {
+        public int loggedInUserId;
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace Library.App
             frmRegisterOrLogin frmRegisterOrLogin = new frmRegisterOrLogin();
             if (frmRegisterOrLogin.ShowDialog() == DialogResult.OK)
             {
+                loggedInUserId = frmRegisterOrLogin.loggedInUserId;
                 this.Show();
             }
             else
@@ -49,6 +51,7 @@ namespace Library.App
         private void btnEditUser_Click(object sender, EventArgs e)
         {
             frmRegisterOrLogin frmRegisterOrLogin = new frmRegisterOrLogin();
+            frmRegisterOrLogin.loggedInUserId = loggedInUserId;
             frmRegisterOrLogin.isLogin = true;
             frmRegisterOrLogin.ShowDialog();
         }

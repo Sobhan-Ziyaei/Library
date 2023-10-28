@@ -1,4 +1,5 @@
 ﻿using Library.DataLayer.Context;
+using Library.DataLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace Library.App
     {
         UnitOfWork db = new UnitOfWork();
         public bool isLogin = false;
+        public int loggedInUserId;
         public frmRegisterOrLogin()
         {
             InitializeComponent();
@@ -43,6 +45,7 @@ namespace Library.App
             {
                 if (db.UserRepository.Get(u => u.Name == txtUserName.Text && u.Password == txtUserPassword.Text).Any())
                 {
+                    loggedInUserId = db.UserUniqueMethodsRepository.getUserIdByName(txtUserName.Text);
                     DialogResult = DialogResult.OK;
                 }
                 else
@@ -60,11 +63,11 @@ namespace Library.App
                 this.Text = "ویرایش کاربر";
                 btnRegister.Hide();
                 btnLogin.Text = "ویرایش";
-                var loggedInUser = db.UserRepository.Get().First();
+                //var loggedInUser = db.UserRepository.Get().First();
                 //var loggedInUser = db.UserRepository.Get(x => x.ID == );
+                var loggedInUser = db.UserRepository.GetById(loggedInUserId);
                 txtUserName.Text = loggedInUser.Name;
                 txtUserPassword.Text = loggedInUser.Password;
-
             }
             else
             {
